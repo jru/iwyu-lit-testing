@@ -11,8 +11,8 @@
 // doesn't choke on Microsoft inline assembly on any of our target platforms.
 // Requires -fms-extensions.
 
-// RUN: %iwyu -Xiwyu --verbose=3 -I . -fms-extensions %s 2>&1 | %chk --check-prefix=IWYU %s
-// RUN: %iwyu -Xiwyu --verbose=3 -fms-extensions %s 2>&1 | %chk --check-prefix=IWYU %s
+// RUN: %iwyu -Xiwyu --verbose=3 -I . -fms-extensions %s 2>&1 | %chk %s
+// RUN: %iwyu -Xiwyu --verbose=3 -fms-extensions %s 2>&1 | %chk %s
 
 int main() {
   int r;

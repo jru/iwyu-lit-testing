@@ -9,7 +9,7 @@
 
 // Tests that we handle correctly identify a[i] as a full use of a.
 
-// RUN: %iwyu -Xiwyu --verbose=3 -I . %s 2>&1 | %chk --check-prefix=IWYU %s
+// RUN: %iwyu -Xiwyu --verbose=3 -I . %s 2>&1 | %chk %s
 
 #include "direct.h"
 
