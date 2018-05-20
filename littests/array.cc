@@ -13,27 +13,25 @@
 
 #include "direct.h"
 
+class Type {};
+
 class A {
   // IWYU: IndirectClass needs a declaration
   IndirectClass *getIndirectClass(int i) {
+
     // IWYU: IndirectClass is.*indirect\.h
+    Type t;
+
+    /// The line above is annotated with a warning that refers to this line
+    /// but OutputCheck doesn't care. I only checks the order of directives.
     (void) sizeof(_b[i]);     // requires full type
-    // IWYU: IndirectClass is.*indirect\.h
-    // IWYU-NEXT: IndirectClass needs a declaration
-    (void) sizeof(&(_b[i]));  // requires full type
-    // IWYU: IndirectClass is.*indirect\.h
+
+    /// Missing check doesn't make it fail
     return &(_b[i]);
   }
   // IWYU: IndirectClass needs a declaration
   IndirectClass *_b;
 };
 
+/// Missing summary doesn't make it fail either
 
-// IWYU: array.cc should add these lines:
-// IWYU-NEXT: #include "indirect.h"
-
-// IWYU: array.cc should remove these lines:
-// IWYU-NEXT: - #include "direct.h"  // lines
-
-// IWYU: The full include-list for .*/array.cc:
-// IWYU-NEXT: #include "indirect.h"  // for IndirectClass
